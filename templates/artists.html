@@ -1,0 +1,63 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+	<!-- main content -->
+	<main class="main">
+		<div class="container-fluid">
+			<!-- artists -->
+			<div class="row row--grid">
+				<!-- breadcrumb -->
+				<div class="col-12">
+					<ul class="breadcrumb">
+						<li class="breadcrumb__item"><a href="{% url 'index' %}">Home</a></li>
+						<li class="breadcrumb__item breadcrumb__item--active">Artists</li>
+					</ul>
+				</div>
+				<!-- end breadcrumb -->
+
+				<!-- title -->
+				<div class="col-12">
+					<div class="main__title main__title--page">
+						<h1>Artists</h1>
+					</div>
+				</div>
+				<!-- end title -->
+			</div>
+
+			<div class="row row--grid">
+				<div class="col-12">
+					<div class="main__filter">
+
+						<div class="slider-radio">
+							<input type="radio" name="grade" id="featured" checked="checked"><label for="featured">Featured</label>
+							<input type="radio" name="grade" id="popular"><label for="popular">Popular</label>
+							<input type="radio" name="grade" id="newest"><label for="newest">Newest</label>
+						</div>
+					</div>
+
+					<div class="row row--grid">
+						{% for well in allartist  %}
+						<div class="col-6 col-sm-4 col-md-3 col-xl-2">
+							
+							<a href="{% url 'artist' well.id well.artist_name %}" class="artist">
+								<div class="artist__cover">
+									<img src="{{well.artist_image.url}}" alt="">
+								</div>
+								<h3 class="artist__title">{{well.artist_name}}</h3>
+							</a>
+						
+						</div>
+						{% endfor %}
+					</div>
+
+						
+
+					<button class="main__load" type="button">Load more</button>
+				</div>
+			</div>
+			<!-- end artists -->
+		</div>
+	</main>
+	<!-- end main content -->
+	{% endblock  %}

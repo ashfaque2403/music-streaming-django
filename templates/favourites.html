@@ -1,0 +1,212 @@
+{% extends 'base.html' %}
+{% load music_tags %}
+{% load static %}
+{% block content %}
+	<!-- main content -->
+	<main class="main">
+		<div class="container-fluid">
+	
+			<div class="row row--grid">
+				<!-- breadcrumb -->
+				<div class="col-12">
+					<ul class="breadcrumb">
+						<li class="breadcrumb__item"><a href="{% url 'index' %}">Home</a></li>
+						<li class="breadcrumb__item breadcrumb__item--active">Profile</li>
+					</ul>
+				</div>
+				<!-- end breadcrumb -->
+
+				<!-- title -->
+				<div class="col-12">
+					<div class="main__title main__title--page">
+						<h1>Profile</h1>
+					</div>
+				</div>
+				<!-- end title -->
+			</div>
+
+			<div class="row row--grid">
+				<div class="col-12">
+					<div class="profile">
+						<div class="profile__user">
+							
+							<div class="profile__avatar">
+								<img src="{% static 'img/avatar.svg' %}" alt="">
+							</div>
+							<div class="profile__meta">
+								<h3>{{ first_name  }}</h3>
+								<span>{{ username }}</span>
+							</div>
+						</div>
+
+						<!-- tabs nav -->
+						<ul class="nav nav-tabs profile__tabs" id="profile__tabs" role="tablist">
+							<li class="nav-item">
+								<a class="nav-link active" data-toggle="tab" href="#tab-1" role="tab" aria-controls="tab-1" aria-selected="true">Profile</a>
+							</li>
+
+							<li class="nav-item">
+								<a class="nav-link" data-toggle="tab" href="#tab-4" role="tab" aria-controls="tab-4" aria-selected="true">Settings</a>
+							</li>
+							<li class="nav-item">
+								<a class="nav-link" data-toggle="tab" href="#tab-4" role="tab" aria-controls="tab-4" aria-selected="false">Create Playlist</a>
+							</li>
+						</ul>
+						<!-- end tabs nav -->
+
+						<a href="{% url 'logout' %}" class="profile__logout" type="logout">
+							<span>Sign out</span>
+							<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4,12a1,1,0,0,0,1,1h7.59l-2.3,2.29a1,1,0,0,0,0,1.42,1,1,0,0,0,1.42,0l4-4a1,1,0,0,0,.21-.33,1,1,0,0,0,0-.76,1,1,0,0,0-.21-.33l-4-4a1,1,0,1,0-1.42,1.42L12.59,11H5A1,1,0,0,0,4,12ZM17,2H7A3,3,0,0,0,4,5V8A1,1,0,0,0,6,8V5A1,1,0,0,1,7,4H17a1,1,0,0,1,1,1V19a1,1,0,0,1-1,1H7a1,1,0,0,1-1-1V16a1,1,0,0,0-2,0v3a3,3,0,0,0,3,3H17a3,3,0,0,0,3-3V5A3,3,0,0,0,17,2Z"/></svg>
+						</a>
+					</div>
+
+					<!-- content tabs -->
+					<div class="tab-content">
+						<div class="tab-pane fade show active" id="tab-1" role="tabpanel">
+							
+
+							<div class="row row--grid">
+								<!-- dashbox -->
+								
+								<!-- end dashbox -->
+
+								<!-- dashbox -->
+								<div class="col-12">
+									<div class="release">
+										
+										
+										<div class="release__list">
+											
+											<ul class="main__list main__list--playlist main__list--dashbox audio-tracks">
+												{% for post in new %}
+                                                    <li class="single-item">
+                                                        <a data-playlist data-title="{{post.song_name}}" data-artist="{{post.artist_name}}" data-img={{post.image.url}} href="{{post.audio_file.url}}" class="single-item__cover">
+                                                            <img src="{{post.image.url}}" alt="">
+                                                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18.54,9,8.88,3.46a3.42,3.42,0,0,0-5.13,3V17.58A3.42,3.42,0,0,0,7.17,21a3.43,3.43,0,0,0,1.71-.46L18.54,15a3.42,3.42,0,0,0,0-5.92Zm-1,4.19L7.88,18.81a1.44,1.44,0,0,1-1.42,0,1.42,1.42,0,0,1-.71-1.23V6.42a1.42,1.42,0,0,1,.71-1.23A1.51,1.51,0,0,1,7.17,5a1.54,1.54,0,0,1,.71.19l9.66,5.58a1.42,1.42,0,0,1,0,2.46Z"/></svg>
+                                                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M16,2a3,3,0,0,0-3,3V19a3,3,0,0,0,6,0V5A3,3,0,0,0,16,2Zm1,17a1,1,0,0,1-2,0V5a1,1,0,0,1,2,0ZM8,2A3,3,0,0,0,5,5V19a3,3,0,0,0,6,0V5A3,3,0,0,0,8,2ZM9,19a1,1,0,0,1-2,0V5A1,1,0,0,1,9,5Z"/></svg>
+                                                        </a>
+                                                        <div class="single-item__title">
+                                                            <h4><a href="#">{{post.song_name}}</a></h4>
+                                                            <span><a href="{% url 'artist' post.id post.artist_name %}">{{post.artist_name}}</a></span>
+                                                        </div>
+                                                    
+                                                        <a href="{% url 'favourite_add' post.id %}" class="single-item__add">
+                                                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Pro 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --><path d="M47.6 300.4L228.3 469.1c7.5 7 17.4 10.9 27.7 10.9s20.2-3.9 27.7-10.9L464.4 300.4c30.4-28.3 47.6-68 47.6-109.5v-5.8c0-69.9-50.5-129.5-119.4-141C347 36.5 300.6 51.4 268 84L256 96 244 84c-32.6-32.6-79-47.5-124.6-39.9C50.5 55.6 0 115.2 0 185.1v5.8c0 41.5 17.2 81.2 47.6 109.5z"/></svg>
+                                                        </a>
+                                                        <a href="#" class="single-item__export">
+                                                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21,14a1,1,0,0,0-1,1v4a1,1,0,0,1-1,1H5a1,1,0,0,1-1-1V15a1,1,0,0,0-2,0v4a3,3,0,0,0,3,3H19a3,3,0,0,0,3-3V15A1,1,0,0,0,21,14Zm-9.71,1.71a1,1,0,0,0,.33.21.94.94,0,0,0,.76,0,1,1,0,0,0,.33-.21l4-4a1,1,0,0,0-1.42-1.42L13,12.59V3a1,1,0,0,0-2,0v9.59l-2.29-2.3a1,1,0,1,0-1.42,1.42Z"></path></svg>
+                                                        </a> 
+                                                         <span class="single-item__time">{{post.duration | time_formatter}}</span> 
+                                                        
+                                                    </li>
+                                                    {% endfor %}
+											</ul>
+											
+										</div>
+										
+									</div>
+								</div>
+				
+								<!-- end dashbox -->
+							</div>
+						</div>
+
+					
+
+						
+
+						<div class="tab-pane fade" id="tab-4" role="tabpanel">
+							<div class="row row--grid">
+								<!-- details form -->
+								<div class="col-12 col-lg-6">
+									<form action="#" class="sign__form sign__form--profile">
+										<div class="row">
+											<div class="col-12">
+												<h4 class="sign__title">Profile details</h4>
+											</div>
+
+											<div class="col-12 col-md-6 col-lg-12 col-xl-6">
+												<div class="sign__group">
+													<label class="sign__label" for="username">Login</label>
+													<input id="username" type="text" name="username" class="sign__input" placeholder="User123">
+												</div>
+											</div>
+
+											<div class="col-12 col-md-6 col-lg-12 col-xl-6">
+												<div class="sign__group">
+													<label class="sign__label" for="email">Email</label>
+													<input id="email" type="text" name="email" class="sign__input" placeholder="email@email.com">
+												</div>
+											</div>
+
+											<div class="col-12 col-md-6 col-lg-12 col-xl-6">
+												<div class="sign__group">
+													<label class="sign__label" for="firstname">First name</label>
+													<input id="firstname" type="text" name="firstname" class="sign__input" placeholder="John">
+												</div>
+											</div>
+
+											<div class="col-12 col-md-6 col-lg-12 col-xl-6">
+												<div class="sign__group">
+													<label class="sign__label" for="lastname">Last name</label>
+													<input id="lastname" type="text" name="lastname" class="sign__input" placeholder="Doe">
+												</div>
+											</div>
+
+											<div class="col-12">
+												<button class="sign__btn" type="button">Save</button>
+											</div>
+										</div>
+									</form>
+								</div>
+								<!-- end details form -->
+
+								<!-- password form -->
+								<div class="col-12 col-lg-6">
+									<form action="#" class="sign__form sign__form--profile">
+										<div class="row">
+											<div class="col-12">
+												<h4 class="sign__title">Change password</h4>
+											</div>
+
+											<div class="col-12 col-md-6 col-lg-12 col-xl-6">
+												<div class="sign__group">
+													<label class="sign__label" for="oldpass">Old password</label>
+													<input id="oldpass" type="password" name="oldpass" class="sign__input">
+												</div>
+											</div>
+
+											<div class="col-12 col-md-6 col-lg-12 col-xl-6">
+												<div class="sign__group">
+													<label class="sign__label" for="newpass">New password</label>
+													<input id="newpass" type="password" name="newpass" class="sign__input">
+												</div>
+											</div>
+
+											<div class="col-12 col-md-6 col-lg-12 col-xl-6">
+												<div class="sign__group">
+													<label class="sign__label" for="confirmpass">Confirm new password</label>
+													<input id="confirmpass" type="password" name="confirmpass" class="sign__input">
+												</div>
+											</div>
+
+
+											<div class="col-12">
+												<button class="sign__btn" type="button">Change</button>
+											</div>
+										</div>
+									</form>
+								</div>
+								<!-- end password form -->
+							</div>
+						</div>
+					</div>
+					<!-- end content tabs -->
+				</div>
+			</div>
+			
+		</div>
+	</main>
+	<!-- end main content -->
+  
+	{% endblock  %}

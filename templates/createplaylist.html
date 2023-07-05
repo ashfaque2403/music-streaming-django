@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+{% load music_tags %}
+{% load static %}
+{% block content %}
+<main class="main">
+    <div class="container-fluid">
+            <h1>Playlist Created</h1>
+            <div class="col-12">
+                <div class="release">
+                    
+                    
+                    <div class="release__list">
+                        
+                        <ul class="main__list main__list--playlist main__list--dashbox audio-tracks">
+                            {% for plays in  plays %}
+                                <li class="single-item">
+                                    <a data-playlist data-title="{{plays.song_name}}" data-artist="{{plays.artist_name}}" data-img={{plays.image.url}} href="{{plays.audio_file.url}}" class="single-item__cover">
+                                        <img src="{{plays.image.url}}" alt="">
+                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18.54,9,8.88,3.46a3.42,3.42,0,0,0-5.13,3V17.58A3.42,3.42,0,0,0,7.17,21a3.43,3.43,0,0,0,1.71-.46L18.54,15a3.42,3.42,0,0,0,0-5.92Zm-1,4.19L7.88,18.81a1.44,1.44,0,0,1-1.42,0,1.42,1.42,0,0,1-.71-1.23V6.42a1.42,1.42,0,0,1,.71-1.23A1.51,1.51,0,0,1,7.17,5a1.54,1.54,0,0,1,.71.19l9.66,5.58a1.42,1.42,0,0,1,0,2.46Z"/></svg>
+                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M16,2a3,3,0,0,0-3,3V19a3,3,0,0,0,6,0V5A3,3,0,0,0,16,2Zm1,17a1,1,0,0,1-2,0V5a1,1,0,0,1,2,0ZM8,2A3,3,0,0,0,5,5V19a3,3,0,0,0,6,0V5A3,3,0,0,0,8,2ZM9,19a1,1,0,0,1-2,0V5A1,1,0,0,1,9,5Z"/></svg>
+                                    </a>
+                                    <div class="single-item__title">
+                                        <h4><a href="#">{{plays.song_name}}</a></h4>
+                                        <span><a href="">{{plays.artist_name}}</a></span>
+                                    </div>
+                                
+                                    <a href="#" class="single-item__add">
+                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Pro 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --><path d="M47.6 300.4L228.3 469.1c7.5 7 17.4 10.9 27.7 10.9s20.2-3.9 27.7-10.9L464.4 300.4c30.4-28.3 47.6-68 47.6-109.5v-5.8c0-69.9-50.5-129.5-119.4-141C347 36.5 300.6 51.4 268 84L256 96 244 84c-32.6-32.6-79-47.5-124.6-39.9C50.5 55.6 0 115.2 0 185.1v5.8c0 41.5 17.2 81.2 47.6 109.5z"/></svg>
+                                    </a>
+                                    <a href="#" class="single-item__export">
+                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21,14a1,1,0,0,0-1,1v4a1,1,0,0,1-1,1H5a1,1,0,0,1-1-1V15a1,1,0,0,0-2,0v4a3,3,0,0,0,3,3H19a3,3,0,0,0,3-3V15A1,1,0,0,0,21,14Zm-9.71,1.71a1,1,0,0,0,.33.21.94.94,0,0,0,.76,0,1,1,0,0,0,.33-.21l4-4a1,1,0,0,0-1.42-1.42L13,12.59V3a1,1,0,0,0-2,0v9.59l-2.29-2.3a1,1,0,1,0-1.42,1.42Z"></path></svg>
+                                    </a> 
+                                    {% comment %} <span class="single-item__time">{{music.duration | time_formatter}}</span>  {% endcomment %}
+                                    
+                                </li>
+                                {% endfor %}
+                        </ul>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+    </div>
+</main>           
+{% endblock  %}
